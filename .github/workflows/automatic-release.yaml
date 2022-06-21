@@ -19,13 +19,15 @@ jobs:
   contains-labels:
     # if: ${{ (github.event.pull_request.merged == true) }}
     runs-on: ubuntu-latest
-    #outputs:
-    #  labels: ${{ steps. }}
+    outputs:
+      labels: ${{ steps.get-labels.labels }}
     steps:
-      - id: print
+      - id: get-labels
         run: |
-          echo ${{ toJson(github.event.pull_request.labels.*.name) }}
-#      - id: check-labels
+          echo "::set-output labels=${{ toJson(github.event.pull_request.labels.*.name) }}"
+      - id: print-labels
+        run: |
+          echo ${{ steps.get-labels.labels }}
 
 
 #  build:
