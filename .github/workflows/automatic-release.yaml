@@ -24,7 +24,7 @@ jobs:
     steps:
       - id: get-labels
         run: |
-          echo "::set-output labels=${{ toJson(github.event.pull_request.labels.*.name) }}"
+          echo "::set-output labels=$(echo "${{ toJson(github.event.pull_request.labels.*.name) }}")"
       - id: print-labels
         run: |
           echo ${{ steps.get-labels.outputs.labels }}
