@@ -24,7 +24,7 @@ jobs:
     steps:
       - id: print
         run: |
-          echo ${{ github.event.pull_request.labels.*.name }}
+          echo ${{ toJson(github.event.pull_request.labels.*.name) }}
 #      - id: check-labels
 
 
