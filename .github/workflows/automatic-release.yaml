@@ -24,7 +24,13 @@ jobs:
     steps:
       - id: get-labels
         run: |
-          echo "::set-output name=labels::$(echo "${{ toJson(github.event.pull_request.labels.*.name) }}")"
+          LABEL_OUTPUT=${{ toJson(github.event.pull_request.labels.*.name) }}
+          echo $LABEL_OUTPUT
+          LABEL_OUTPUT="${LABEL_OUTPUT//'%'/'%25'}"
+          LABEL_OUTPUT="${LABEL_OUTPUT//$'\n'/'%0A'}"
+          LABEL_OUTPUT="${LABEL_OUTPUT//$'\r'/'%0D'}"
+          echo $LABEL_OUTPUT
+          echo "::set-output name=labels::$(LABEL_OUTPUT)"
       - id: print-labels
         run: |
           echo ${{ steps.get-labels.outputs.labels }}
