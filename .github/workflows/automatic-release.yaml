@@ -25,7 +25,7 @@ jobs:
       - id: match-label
         shell: bash
         run: |
-          ${GITHUB_WORKSPACE}/.github/script.sh -n 'major, minor, patch' -l '${{ join(github.event.issue.labels.*.name, ', ') }}'
+          ${GITHUB_WORKSPACE}/.github/workflows/get-label.sh -n 'major, minor, patch' -l '${{ join(github.event.issue.labels.*.name, ', ') }}'
           echo "::set-output name=match::$(cat match.txt)"
 
   semver-version:
