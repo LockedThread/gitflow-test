@@ -16,25 +16,30 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  contains-labels:
+  get-labels:
     # if: ${{ (github.event.pull_request.merged == true) }}
     runs-on: ubuntu-latest
     outputs:
-      labels: ${{ steps.get-labels.outputs.labels }}
+      labels: ${{ steps.match-label.outputs.match }}
     steps:
-      - id: get-labels
+      - id: match-label
+        shell: bash
         run: |
-          LABEL_OUTPUT=${{ toJson(github.event.pull_request.labels.*.name) }}
-          echo $LABEL_OUTPUT
-          LABEL_OUTPUT="${LABEL_OUTPUT//'%'/'%25'}"
-          LABEL_OUTPUT="${LABEL_OUTPUT//$'\n'/'%0A'}"
-          LABEL_OUTPUT="${LABEL_OUTPUT//$'\r'/'%0D'}"
-          echo $LABEL_OUTPUT
-          echo "::set-output name=labels::$(LABEL_OUTPUT)"
-      - id: print-labels
-        run: |
-          echo ${{ steps.get-labels.outputs.labels }}
+          ${GITHUB_WORKSPACE}/.github/script.sh -n 'major, minor, patch' -l '${{ join(github.event.issue.labels.*.name, ', ') }}'
+          echo "::set-output name=match::$(cat match.txt)"
 
+  semver-version:
+    needs:
+      - get-labels
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: zwaldowski/semver-release-action@v2
+        id: version
+        with:
+          bump: ${{ needs.get-labels.outputs.labels }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
 #  build:
 #    if: ${{ (github.event.pull_request.merged == true) && (contains(github.event.pull_request.labels.*.name, 'site')) }}
