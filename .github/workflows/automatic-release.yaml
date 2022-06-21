@@ -19,8 +19,8 @@ jobs:
   contains-labels:
     if: ${{ (github.event.pull_request.merged == true) }}
     runs-on: ubuntu-latest
-    outputs:
-      labels: ${{ steps. }}
+    #outputs:
+    #  labels: ${{ steps. }}
     steps:
       - id: print
         run: |
