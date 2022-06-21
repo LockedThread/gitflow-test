@@ -17,14 +17,14 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   contains-labels:
-    if: ${{ (github.event.pull_request.merged == true) }}
+    # if: ${{ (github.event.pull_request.merged == true) }}
     runs-on: ubuntu-latest
     #outputs:
     #  labels: ${{ steps. }}
     steps:
       - id: print
         run: |
-          echo ${{ github.event.pull_request.labels.*.name }}
+          echo ${{ toJson(github.event.pull_request.labels.*.name) }}
 #      - id: check-labels
 
 
