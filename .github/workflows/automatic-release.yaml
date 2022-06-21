@@ -20,14 +20,14 @@ jobs:
     # if: ${{ (github.event.pull_request.merged == true) }}
     runs-on: ubuntu-latest
     outputs:
-      labels: ${{ steps.get-labels.labels }}
+      labels: ${{ steps.get-labels.outputs.labels }}
     steps:
       - id: get-labels
         run: |
           echo "::set-output labels=${{ toJson(github.event.pull_request.labels.*.name) }}"
       - id: print-labels
         run: |
-          echo ${{ steps.get-labels.labels }}
+          echo ${{ steps.get-labels.outputs.labels }}
 
 
 #  build:
