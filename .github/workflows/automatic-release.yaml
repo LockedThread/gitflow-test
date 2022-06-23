@@ -56,7 +56,7 @@ jobs:
             github.rest.actions.createWorkflowDispatch({
               owner: 'LockedThread',
               repo: 'gitflow-test',
-              workflow_id: 'release.yml',
+              workflow_id: 'release.yaml',
               ref: 'main',
               inputs: {
                 version: '${{ needs.semver-version.outputs.version }}',
