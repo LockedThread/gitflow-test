@@ -55,7 +55,7 @@ jobs:
         uses: thomaseizinger/create-pull-request@1.2.2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          head: release/v${{ env.VERSION }}
+          head: release/${{ env.VERSION }}
           base: development
           title: ${{ env.VERSION }} into development
           reviewers: ${{ github.event.issue.user.login }}

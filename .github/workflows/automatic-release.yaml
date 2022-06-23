@@ -42,6 +42,7 @@ jobs:
         with:
           bump: ${{ needs.get-labels.outputs.labels }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          prefix: 'v'
 
   release:
     runs-on: ubuntu-latest
