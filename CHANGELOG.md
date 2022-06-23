@@ -17,12 +17,18 @@ Types of Changes:
 
 ## [Unreleased]
 
+## [0.0.1] - 2022-06-23
+
 ### Added
 
-- Added this changelog file!
+-   Added this changelog file!
 
 ### Changed
 
 ### Fixed
 
 ### Removed
+
+[Unreleased]: https://github.com/LockedThread/gitflow-test/compare/0.0.1...HEAD
+
+[0.0.1]: https://github.com/LockedThread/gitflow-test/compare/a5530b53535ac2153e86ed8ee79dab19215621df...0.0.1
