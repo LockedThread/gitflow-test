@@ -38,6 +38,8 @@ for label in "${labelArray[@]}"; do
   for need in "${needsArray[@]}"; do
     if [[ "$label" == "$need" ]]; then
       echo "$label" > match.txt
+      exit 0
     fi
   done
 done
+exit 1
