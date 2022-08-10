@@ -17,7 +17,7 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   get-labels:
-    if: ${{ (github.event.pull_request.merged == true) }}
+    if: ${{github.event.pull_request.merged == true && !startsWith(github.head_ref, 'release/')}}
     runs-on: ubuntu-latest
     outputs:
       labels: ${{ steps.match-label.outputs.match }}
